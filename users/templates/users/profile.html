@@ -1,0 +1,5 @@
+<p>You are authenticated as...</p>
+<p>First_name: {{ user.first_name }}</p>
+<p>Last_name: {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+<a href="{% url 'users:logout' %}">Logout</a>
