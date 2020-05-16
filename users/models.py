@@ -36,5 +36,6 @@ class MyUser(AbstractUser):
     def __str__(self):
         return self.email
 
-
-
+class Profile(models.Model):
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='profile_images/')
