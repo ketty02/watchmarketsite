@@ -8,33 +8,33 @@ from users.admin import MyUserCreationForm
 from helpers.upload import handle_upload_file
 
 
-def handle_login(request) :
-    if request.method == 'POST' :
+def handle_login(request):
+    if request.method == 'POST':
         form = LoginForm(request.POST)
 
-        if form.is_valid() :
+        if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = authenticate(request, username=email, password=password)
 
-            if user is not None :
+            if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse('users:profile'))
-    else :
+    else:
         form = LoginForm()
 
     return render(request, 'users/login.html', {
-        'form' : form
+        'form': form
     })
 
 
-def handle_logout(request) :
+def handle_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('users:login'))
 
 
 @login_required
-def profile(request) :
+def profile(request):
     if request.method == 'POST' :
         user_profile = request.user.profile
         form = UploadProfileImage(request.POST, request.FILES, instance=user_profile)
@@ -48,16 +48,16 @@ def profile(request) :
 
     else :
         form = UploadProfileImage()
-    return render(request, 'users/profile.html' , {
-        'form' : form
+    return render(request, 'users/profile.html', {
+        'form': form
     })
 
 
-def register(request) :
-    if request.method == 'POST' :
+def register(request):
+    if request.method == 'POST':
         form = MyUserCreationForm(request.POST)
 
-        if form.is_valid() :
+        if form.is_valid():
             form.save()
 
             return HttpResponseRedirect(reverse('users:login'))
@@ -65,19 +65,23 @@ def register(request) :
         form = MyUserCreationForm()
 
     return render(request, 'users/register.html', {
-        'form' : form
+        'form': form
     })
 
 
-def upload(request) :
-    if request.method == 'POST' :
+def upload(request):
+    if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
 
-        if form.is_valid() :
+        if form.is_valid():
             my_file = form.cleaned_data['my_file']
             handle_upload_file(my_file)
-    else :
+            return render(request, 'users/upload.html', {
+                'form' : form
+            })
+
+    else:
         form = UploadFileForm()
     return render(request, 'users/upload.html', {
-        'form' : form
+        'form': form
     })

@@ -1,5 +1,5 @@
 from django import forms
-from users.models import MyUser , Profile
+from users.models import MyUser, Profile
 
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True, label='E-mail')
@@ -57,8 +57,10 @@ class RegisterForm(forms.Form):
         user.last_name = last_name
         user.save()
 
+
 class UploadFileForm(forms.Form):
     my_file = forms.FileField(required=True)
+
 
 class UploadProfileImage(forms.ModelForm):
     class Meta:

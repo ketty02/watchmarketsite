@@ -2,15 +2,13 @@
 <p>First_name: {{ user.first_name }}</p>
 <p>Last_name: {{ user.last_name }}</p>
 <p>Email: {{ user.email }}</p>
-<p>Email: {{ user.profile }}</p>
-<a href="{% url 'users:logout' %}">Logout</a>
 
-<br/><br/><br/>
+<a href="{% url 'users:logout' %}">Logout</a>
 
 <img src="{{ MEDIA_URL }}{{ user.profile.avatar }}" />
 
 <form method="post" action="{% url 'users:profile' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Change profle imagine" />
+    <input type="submit" value="Change profile imagine" />
 </form>
