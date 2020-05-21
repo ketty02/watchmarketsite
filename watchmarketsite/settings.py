@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
-]
+    'users',
+  ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -127,3 +128,6 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.MyUser'
 LOGIN_URL = 'users:login'
+
+MEDIA_ROOT = 'media/'
+MEDIA_URL = '/media/'
