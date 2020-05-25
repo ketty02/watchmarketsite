@@ -6,9 +6,11 @@ from users.forms import LoginForm, UploadFileForm, UploadProfileImage
 from django.http import HttpResponseRedirect
 from users.admin import MyUserCreationForm
 from helpers.upload import handle_upload_file
-from django.core.mail import send_mail ,EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import get_template
+
+
 
 def handle_login(request):
     if request.method == 'POST':
@@ -53,6 +55,7 @@ def profile(request):
     return render(request, 'users/profile.html', {
         'form': form
     })
+
 
 @login_required
 def profile_email(request):
@@ -102,7 +105,7 @@ def upload(request):
             my_file = form.cleaned_data['my_file']
             handle_upload_file(my_file)
             return render(request, 'users/upload.html', {
-                'form': form
+                'form' : form
             })
 
     else:

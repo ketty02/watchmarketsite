@@ -1,3 +1,5 @@
+{{ host }}
+<a href="http://{{ host }}{{ url 'users:login' }}">Login</a>
 <form method="post" action="{% url 'users:register' %}">
     {% csrf_token %}
     {{ form.as_p }}

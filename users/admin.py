@@ -4,13 +4,29 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from users.models import MyUser
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django import forms
 
 class MyUserCreationForm(UserCreationForm):
     class Meta :
         model = MyUser
         exclude = []
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email']
+    password1 = None
+    password2 = None
 
+    def clean_password2(self):
+        pass
+
+    def _post_clean(self):
+        pass
+
+    def save(self, commit=True):
+        email = self.cleaned_data['email']
+        first_name = self.cleaned_data['first_name']
+        last_name = self.cleaned_data['last_name']
+        user = MyUser.objects.create_user(email, first_name, last_name)
+        user.save()
+        return user
 
 class MyUserChangeForm(UserChangeForm):
     class Meta:
@@ -33,7 +49,7 @@ class MyUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes' : ('wide',),
-            'fields' : ('email', 'password1', 'password2'),
+            'fields' : ( 'first_name', 'last_name','email'),
         }),
     )
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
