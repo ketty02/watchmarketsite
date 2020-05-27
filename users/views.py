@@ -11,7 +11,6 @@ from django.conf import settings
 from django.template.loader import get_template
 
 
-
 def handle_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)

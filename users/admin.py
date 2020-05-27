@@ -7,10 +7,10 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django import forms
 
 class MyUserCreationForm(UserCreationForm):
-    class Meta :
+    class Meta:
         model = MyUser
-        exclude = []
         fields = ['first_name', 'last_name', 'email']
+
     password1 = None
     password2 = None
 
@@ -21,11 +21,19 @@ class MyUserCreationForm(UserCreationForm):
         pass
 
     def save(self, commit=True):
-        email = self.cleaned_data['email']
-        first_name = self.cleaned_data['first_name']
-        last_name = self.cleaned_data['last_name']
-        user = MyUser.objects.create_user(email, first_name, last_name)
-        user.save()
+        user = super(forms.ModelForm, self).save(commit=False)
+
+        email = self.cleaned_data.get('email')
+        first_name = self.cleaned_data.get('first_name')
+        last_name = self.cleaned_data.get('last_name')
+
+        user.email = email
+        user.first_name = first_name
+        user.last_name = last_name
+
+
+        if commit:
+            user.save()
         return user
 
 class MyUserChangeForm(UserChangeForm):

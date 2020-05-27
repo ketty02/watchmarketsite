@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.contrib.sites.models import Site
 from django.shortcuts import reverse
 
-def send_register_email(first_name,last_name,email,password):
+def send_register_email(first_name, last_name, email, password):
     login_url = '{HOST}{LOGIN_ROUTE}'.format(
         HOST=Site.objects.get_current().domain,
         LOGIN_ROUTE=reverse('users:login')
@@ -22,5 +22,5 @@ def send_register_email(first_name,last_name,email,password):
         settings.EMAIL_HOST_USER,
         [email]
     )
-    email.content_subtype = 'html'
-    email.send()
+    mail.content_subtype = 'html'
+    mail.send()
