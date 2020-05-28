@@ -16,11 +16,11 @@ def send_register_email(first_name, last_name, email, password):
         'last_name': last_name,
         'login_url': login_url
     })
-    mail = EmailMultiAlternatives(
+    email = EmailMultiAlternatives(
         'New account',
         email_content,
         settings.EMAIL_HOST_USER,
         [email]
     )
-    mail.content_subtype = 'html'
-    mail.send()
+    email.content_subtype = 'html'
+    email.send()
