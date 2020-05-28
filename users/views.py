@@ -6,6 +6,9 @@ from users.forms import LoginForm, UploadFileForm, UploadProfileImage
 from django.http import HttpResponseRedirect
 from users.admin import MyUserCreationForm
 from helpers.upload import handle_upload_file
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
+from django.template.loader import get_template
 
 
 def handle_login(request):
@@ -35,22 +38,46 @@ def handle_logout(request):
 
 @login_required
 def profile(request):
-    if request.method == 'POST' :
+    if request.method == 'POST':
         user_profile = request.user.profile
         form = UploadProfileImage(request.POST, request.FILES, instance=user_profile)
 
-        if form.is_valid() :
+        if form.is_valid():
             user_profile = form.save(commit=False)
             user_profile.user = request.user
             user_profile.save()
 
             return HttpResponseRedirect(reverse('users:profile'))
 
-    else :
+    else:
         form = UploadProfileImage()
     return render(request, 'users/profile.html', {
         'form': form
     })
+
+
+@login_required
+def profile_email(request):
+    email_template = get_template('users/email.html')
+    email_content = email_template.render({
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name,
+    })
+    mail = EmailMultiAlternatives(
+        'Your profile data request',
+        email_content,
+        settings.EMAIL_HOST_USER,
+        [request.user.email]
+    )
+    mail.content_subtype = 'html'
+    mail.attach_file('{BASE_DIR}/{MEDIA_ROOT}/{PROFILE_IMAGE}'.format(
+        BASE_DIR=settings.BASE_DIR,
+        MEDIA_ROOT=settings.MEDIA_ROOT,
+        PROFILE_IMAGE=request.user.profile.avatar
+    ))
+    mail.send()
+
+    return HttpResponseRedirect(reverse('users:profile'))
 
 
 def register(request):
