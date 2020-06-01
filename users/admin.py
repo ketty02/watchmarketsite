@@ -1,10 +1,12 @@
 from __future__ import unicode_literals
 from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib import admin
+from django.conf import settings
 from django.contrib.auth.admin import UserAdmin
 from users.models import MyUser
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django import forms
+from activation.signals import set_inactive_user
 
 class MyUserCreationForm(UserCreationForm):
     class Meta:
@@ -31,9 +33,10 @@ class MyUserCreationForm(UserCreationForm):
         user.first_name = first_name
         user.last_name = last_name
 
-
+        set_inactive_user.send(sender=settings.AUTH_USER_MODEL, user=user)
         if commit:
             user.save()
+
         return user
 
 class MyUserChangeForm(UserChangeForm):
