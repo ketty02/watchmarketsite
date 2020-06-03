@@ -2,6 +2,7 @@ from django import forms
 from users.models import MyUser, Profile
 from django.contrib.auth import password_validation
 
+
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True, label='E-mail')
     password = forms.CharField(
