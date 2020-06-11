@@ -44,5 +44,3 @@ def profile_picture(backend, user, response, is_new, *args, **kwargs):
                 profile = user.profile
                 profile.avatar.save(f'{uuid4()}.jpg', ContentFile(image_response.content))
                 profile.save()
-
-
