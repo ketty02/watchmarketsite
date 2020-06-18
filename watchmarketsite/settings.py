@@ -137,12 +137,12 @@ LOGIN_REDIRECT_URL = 'users:profile'
 MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = config('EMAIL_TLS', True)
 EMAIL_PORT = config('EMAIL_PORT', 587)
 EMAIL_HOST_USER = 'razvan.bercia80@gmail.com'
-EMAIL_HOST_PASSWORD = 'Parola@1234'
+EMAIL_HOST_PASSWORD = 'Numaiyo01'
 
 SITE_ID = 1
 
