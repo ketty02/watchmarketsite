@@ -142,7 +142,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = config('EMAIL_TLS', True)
 EMAIL_PORT = config('EMAIL_PORT', 587)
 EMAIL_HOST_USER = 'razvan.bercia80@gmail.com'
-EMAIL_HOST_PASSWORD = 'Numaiyo01'
+EMAIL_HOST_PASSWORD = 'Parolanoua01'
 
 SITE_ID = 1
 
