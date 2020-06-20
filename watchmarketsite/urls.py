@@ -23,5 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin-view'),
     path('users/',include('users.urls')),
     path('users/activate', include('activation.urls')),
-    path('social-auth/', include('social_django.urls', namespace='social'))
+    path('social-auth/', include('social_django.urls', namespace='social')),
+    path('', include('django.contrib.auth.urls')),
   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#1 - Submit email form                        //PasswordResetView.as_view
+#2 - Email sent success message               //PasswordResetDoneView.as_view
+#3 - Link to password Rest form in email      //PasswordResetConfirmView.as_view
+#4 - Password successfully changed message    //PasswordResetCompleteView.as_view
