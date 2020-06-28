@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users',
     'social_django',
     'activation',
+    'market',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
