@@ -38,6 +38,7 @@ def profile_picture(backend, user, response, is_new, *args, **kwargs):
             try:
                 image_response = request('GET', url, params=params)
                 image_response.raise_for_status()
+                print(image_response.headers)
             except HTTPError:
                 pass
             else:
