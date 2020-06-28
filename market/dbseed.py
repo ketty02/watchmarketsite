@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 
 
 def get_or_create_timekeepers_group():
-    available_content = ContentType.objects.filter(model__in=['watch', 'type', 'watchtype']).all()
+    available_content = ContentType.objects.filter(model__in=['watch', 'type']).all()
 
     available_permissions = (
         Permission.object.filter(

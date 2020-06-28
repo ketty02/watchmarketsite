@@ -1,6 +1,6 @@
 from django.contrib import admin
 from market.models.watch import Watch
-from market.models.type import Type, WatchType
+from market.models.type import Type
 
 @admin.register(Watch)
 class WatchAdmin(admin.ModelAdmin):
@@ -32,15 +32,15 @@ class WatchAdmin(admin.ModelAdmin):
          super().save_model(request, obj, form, change)
 
 
-@admin.register(WatchType)
-class WatchTypeAdmin(admin.ModelAdmin):
-    def get_queryset(self, request) :
-        queryset = super().get_queryset( request )
+@admin.register(Type)
+class TypeAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
 
-        if request.user.is_superuser :
+        if request.user.is_superuser:
             return queryset
 
-        queryset = queryset.filter( watch__in=request.user.watches.all() )
+        queryset = queryset.filter(watch__in=request.user.watches.all())
 
         return queryset
 
@@ -53,4 +53,3 @@ class WatchTypeAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Type)
