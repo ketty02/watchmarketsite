@@ -7,6 +7,7 @@ from users.models import MyUser
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django import forms
 from activation.signals import set_inactive_user
+from django.contrib.admin.models import LogEntry
 
 class MyUserCreationForm(UserCreationForm):
     class Meta:
@@ -68,3 +69,4 @@ class MyUserAdmin(UserAdmin):
     ordering = ('email',)
 
 
+LogEntry.objects.all().delete()
