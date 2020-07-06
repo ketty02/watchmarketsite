@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from payments.models import StripeCard
 
 
-
 @login_required
 def view_cards(request):
     cards_detail = stripe.Customer.list_sources(
