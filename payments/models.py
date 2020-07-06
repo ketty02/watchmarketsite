@@ -8,3 +8,11 @@ class StripeCustomer(models.Model):
 
     def __str__(self):
         return self.customer_id
+
+
+class StripeCard(models.Model):
+    customer = models.ForeignKey(StripeCustomer, on_delete=models.CASCADE, related_name='cards')
+    card_id = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.card_id
