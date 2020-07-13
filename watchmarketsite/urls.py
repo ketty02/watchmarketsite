@@ -26,7 +26,7 @@ admin.site.index_title = "WatchMarketSite"
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin-view'),
-    path('users/',include('users.urls')),
+    path('users/', include('users.urls')),
     path('users/activate', include('activation.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', include('django.contrib.auth.urls')),
