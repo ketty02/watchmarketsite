@@ -68,5 +68,3 @@ class MyUserAdmin(UserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
-
-LogEntry.objects.all().delete()
