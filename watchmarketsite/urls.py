@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.watchmarketsite.views import homepage
 
 admin.site.site_header = "WatchMarketSite"
 admin.site.site_title = "Just in Time"
@@ -30,7 +31,7 @@ urlpatterns = [
     path('users/activate', include('activation.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', include('django.contrib.auth.urls')),
-    path('',view=homepage,name='homepage')
+    path('',view=homepage, name='homepage')
   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #1 - Submit email form                        //PasswordResetView.as_view
