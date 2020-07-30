@@ -30,6 +30,7 @@ urlpatterns = [
     path('users/activate', include('activation.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', include('django.contrib.auth.urls')),
+    path('',view=homepage,name='homepage')
   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #1 - Submit email form                        //PasswordResetView.as_view
